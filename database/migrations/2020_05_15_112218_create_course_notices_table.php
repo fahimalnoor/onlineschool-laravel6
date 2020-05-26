@@ -17,7 +17,7 @@ class CreateCourseNoticesTable extends Migration
             $table->increments('id');
             $table->string('course_id');
             $table->string('course_name');
-            $table->string('course_notice');
+            $table->string('course_notice')->nullable();
             $table->timestamps();
         });
     }

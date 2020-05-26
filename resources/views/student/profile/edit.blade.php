@@ -1,11 +1,11 @@
-@extends('teacher.layout.master')
+@extends('student.layout.master')
 @section('content')
 
 <div class="row">
                   <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">{{ $page_name }}</strong>
+                            <strong class="card-title">Update Your Info!</strong>
                         </div>
                         <div class="card-body">
                           <!-- Credit Card -->
@@ -24,43 +24,17 @@
                                     @endif
 
                                   <hr>
-                                  {{ Form::model($course, ['route' => ['course-update', $course->id], 'method'=>'put']) }}
 
-                                  {{ Form::open(['url' => 'dashboard/course/store', 'method'=>'post', 'enctype'=>'multipart/form-data']) }}
-                                      
-                                      <div class="form-group">
-                                      {{ Form::label('c_name', 'Course Name', ['class' => 'control-label mb-1', 'id' => 'c_name']) }}
-                                      {{ Form::text('c_name', null, ['class' => 'form-control']) }}
-                                      </div>
+                  
+                                  <form action="{{ route('proup') }}" method="post">
+                                  @csrf
+                                  <pre>
+                                  Your Name: <input type="text" name="name" value="{{ $user->name }}" required>
 
-                                      <div class="form-group">
-                                      {{ Form::label('c_curriculum', 'Course Curriculum', ['class' => 'control-label mb-1', 'id' => 'c_curriculum']) }}
-                                      {{ Form::textarea('c_curriculum', null, ['class' => 'form-control']) }}
-                                      </div>
-
-                                      <div class="form-group">
-                                      {{ Form::label('c_link', 'Video Call Link', ['class' => 'control-label mb-1', 'id' => 'c_link']) }}
-                                      {{ Form::text('c_link', null, ['class' => 'form-control']) }}
-                                      </div>
-
-                                      <div class="form-group">
-                                        <input type="file" name="c_image" class="form-control-file text-primary" id="course-pic">
-                                    </div>
-
-                                    <div class="form-group">
-                                      {{ Form::label('schedule', 'Select Schedule', ['class' => 'control-label mb-1']) }}
-                                      {{ Form::select('schedule[]', $schedule, null, ['class' => 'form-control myselect', 'data-placeholder' => 'Select Schedules', 'multiple']) }}
-                                    </div>
-
-
-                                      <div>
-                                          <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                              <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                              <span id="payment-button-amount">Create</span>
-                                              <span id="payment-button-sending" style="display:none;">Sending…</span>
-                                          </button>
-                                      </div>
-                                      {{ Form::close() }}
+                                  New Email: <input type="text" name="email" value="{{ $user->email }}" required>  
+                                  <input type="submit" name="submit" class="btn btn-sn btn-info" value="Update" />
+                                  </pre>
+                                  </form>
                               </div>
                           </div>
 

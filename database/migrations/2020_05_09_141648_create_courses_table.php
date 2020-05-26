@@ -16,11 +16,12 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('c_name');
-            $table->string('c_curriculum');
-            $table->string('c_link');
-            $table->string('c_image');
-            $table->integer('c_teacher_id');
-            $table->string('c_teacher_name');
+            $table->string('c_id');
+            $table->string('c_curriculum')->nullable();
+            $table->string('c_link')->nullable();
+            $table->string('c_image')->nullable();
+            $table->string('c_teacher_id')->nullable();
+            $table->string('c_teacher_name')->nullable();
             $table->timestamps();
         });
     }

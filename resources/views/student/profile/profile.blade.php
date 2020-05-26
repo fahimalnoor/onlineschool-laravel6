@@ -1,4 +1,4 @@
-@extends('teacher.layout.master')
+@extends('student.layout.master')
 @section('content')
 
 <div class="row">
@@ -27,7 +27,7 @@
                                 @endif
 
                                 <a href="{{ url('dashboard/profile/edit/'.$user->id) }}" class="mt-2 btn btn-primary">Edit Profile</a>
-
+                                <a href="{{url('/dashboard/profile/delete/'.$user->email )}}" class="btn btn-sn btn-danger" >Delete Your ID </a>
                         </div>
                     </div> <!-- .card -->
 

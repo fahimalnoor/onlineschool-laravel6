@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
+use DB;
 use Auth;
 use Image;
 use App\User;
@@ -14,7 +14,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('teacher.profile.profile', array('user' => Auth::user()));
+        return view('student.profile.profile', array('user' => Auth::user()));
     }
 
     public function updateAvatar(Request $request)
@@ -28,18 +28,34 @@ class DashboardController extends Controller
             $user->avatar = $filename;
             $user->save();
 
-            return view('teacher.profile.profile', array('user' => Auth::user()));
+            return view('student.profile.profile', array('user' => Auth::user()));
         }
     }
 
 
     public function edit($id)
     {
-        $page_name = 'Profile Edit';
         $user = User::find($id);
         
-        return view('teacher.profile.edit', compact('page_name', 'user'));
+        return view('student.profile.edit', compact('user', 'user'));
     }
+
+    public function proup(Request $req){
+
+        $data=array();
+    
+          $data['name'] = $req->name;
+          $data['email'] = $req->email;
+
+        $update = DB::table('users')->where('id', auth::user()->id)->limit(1)->update(['name' => $data['name'], 'email' => $data['email']]); 
+            
+            if($update){
+                return redirect()->action('DashboardController@index')->with('success', 'Profile updated successfully!');
+            }else{
+                echo "Updating Failed!";
+            }
+    
+        }
 
    
     public function update(Request $request, $id)
@@ -63,5 +79,14 @@ class DashboardController extends Controller
         return redirect()->action('DashboardController@index')->with('success', 'Profile updated successfully!');
     }
 
-    
+    public function delete($email)
+    {
+        $dlt = DB::table('users')->where('email', $email)->delete();
+        if($dlt){
+            echo "Your ID Is Deleted!";
+        }else{
+
+            echo "ID Deleting Failed!";
+        }
+    }
 }

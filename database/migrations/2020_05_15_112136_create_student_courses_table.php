@@ -16,13 +16,13 @@ class CreateStudentCoursesTable extends Migration
         Schema::create('student_courses', function (Blueprint $table) {
             $table->increments('id');
             $table->string('course_id');
-            $table->string('course_name');
+            $table->string('course_name')->nullable();
             $table->string('student_name');
             $table->string('student_id');
-            $table->string('teacher_name');
-            $table->string('teacher_id');
-            $table->string('course_grade');
-            $table->boolval('course_valid')->default('false');
+            $table->string('teacher_name')->nullable();
+            $table->string('teacher_id')->nullable();
+            $table->string('course_grade')->nullable();
+            $table->boolean('course_valid')->default(0);
             $table->timestamps();
         });
     }
